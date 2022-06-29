@@ -1,9 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deepcon-frontend
-  labels:
-    app: frontend
+  name: frontend
 spec:
   replicas: 1
   selector:
@@ -22,19 +20,19 @@ spec:
 
 ---
 
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
   name: frontend-service
 spec:
-  type: LoadBalancer
   selector:
     app: frontend
   ports:
-    - protocol: TCP
-      port: 3000
-      targetPort: 3000
-      nodePort: 32000
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+    nodePort: 32007
+  type: LoadBalancer
 
 ---
 
@@ -55,10 +53,10 @@ spec:
         app: server
     spec:
       containers:
-      - name: frontend
+      - name: servcer
         image: aakash0017/deepcon-server
         ports:
-        - containerPort: 8000
+        - containerPort: 9000
 
 ---
 
@@ -72,4 +70,4 @@ spec:
   ports:
     - protocol: TCP
       port: 8000
-      targetPort: 8000
+      targetPort: 9000

@@ -1,0 +1,14 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: deepcon
+  region: ap-south-1
+
+nodeGroups:
+  - name: ng-1-workers
+    labels: { role: workers }
+    instanceType: t3.small;
+    minSize: 1
+    maxSize: 4
+    desiredCapacity: 2
